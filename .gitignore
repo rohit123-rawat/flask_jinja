@@ -1,0 +1,6 @@
+
+*.pyc
+venv/
+*.db
+config.ini
+node_modules
