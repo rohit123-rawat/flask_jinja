@@ -1,0 +1,35 @@
+fetchUsers();
+
+function redirectToChartPage() {
+  window.location.href = "/chart";
+}
+
+function openModal() {
+  var modal = document.getElementById("myModal");
+  modal.classList.remove("hidden");
+}
+
+function closeModal() {
+  var modal = document.getElementById("myModal");
+  modal.classList.add("hidden");
+}
+
+document.getElementById("myForm").addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  var formData = new FormData(event.target);
+
+  fetch("/submit", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
+  closeModal();
+});
