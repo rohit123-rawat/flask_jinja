@@ -1,6 +1,17 @@
+__pycache__/
 
-*.pyc
+# Virtual environment
 venv/
+env/
+*.env
+
 *.db
+
 config.ini
-node_modules
+
+node_modules/
+
+
+
+.DS_Store
+
