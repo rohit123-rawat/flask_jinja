@@ -12,7 +12,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
-class users(db.Model):
+class Users(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=True)
@@ -20,10 +20,14 @@ class users(db.Model):
 
 
 @app.route('/')
-def index():
+@app.route('/<int:page>', methods=['GET'])
+def index(page=1):
+    per_page = 5
+    users_pagination = Users.query.order_by(Users.id).paginate(
+        page=page, per_page=per_page, error_out=False)
     title = 'Flask App with Jinja2'
     name = 'Admin Panel'
-    return render_template('app.html', title=title, name=name, users=users.query.all())
+    return render_template('app.html', title=title, name=name, users_pagination=users_pagination)
 
 
 @app.route('/chart')
@@ -36,7 +40,7 @@ def submit_form():
     name = request.form.get('name')
     last_name = request.form.get('last_name')
 
-    new_user = users(name=name, last_name=last_name)
+    new_user = Users(name=name, last_name=last_name)
     db.session.add(new_user)
     db.session.commit()
 
@@ -45,7 +49,7 @@ def submit_form():
 
 @app.route('/delete/<int:user_id>', methods=['POST'])
 def delete_user(user_id):
-    user = users.query.get(user_id)
+    user = Users.query.get(user_id)
     if user:
         db.session.delete(user)
         db.session.commit()
