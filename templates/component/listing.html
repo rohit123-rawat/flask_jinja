@@ -9,6 +9,9 @@
                     Last Name
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    city
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Delete
                 </th>
             </tr>
@@ -21,6 +24,9 @@
                 </td>
                 <td class="px-6 py-4">
                     {{ user.last_name }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ user.city }}
                 </td>
                 <td class="px-6 py-4">
                     <form action="/delete/{{ user.id }}" method="post">

@@ -17,6 +17,7 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=True)
     last_name = db.Column(db.String(100), nullable=True)
+    city = db.Column(db.String(100), nullable=True)
 
 
 @app.route('/')
