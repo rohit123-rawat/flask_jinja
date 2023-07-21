@@ -12,17 +12,21 @@
       ```
    2. Activate the environment
       ```sh
-      source venv/bin/activate             
+      source venv/bin/activate
       ```
-   4. Install dependence 
+   3. Install dependence
       ```sh
        npm install
       ```
-   5. Run the application 
+   4. Install dependencies
+      ```sh
+      pip install -r requirements.txt
+      ```
+   5. Run the application
       ```sh
        python app.py or flask run --port=8000
       ```
-   6. Connect with database 
+   6. Connect with database
       ```sh
        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user_name:Password@localhost/db_name'
       ```
