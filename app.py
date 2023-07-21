@@ -40,8 +40,12 @@ def chart():
 def submit_form():
     name = request.form.get('name')
     last_name = request.form.get('last_name')
+    city = request.form.get('city')
 
-    new_user = Users(name=name, last_name=last_name)
+    if not name or not last_name or not city:
+        return redirect(url_for('index'))
+
+    new_user = Users(name=name, last_name=last_name, city=city)
     db.session.add(new_user)
     db.session.commit()
 
