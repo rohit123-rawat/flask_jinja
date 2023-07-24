@@ -1,4 +1,4 @@
-from flask import Flask,  render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -14,7 +14,7 @@ migrate = Migrate(app, db)
 
 class Users(db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=True)
     last_name = db.Column(db.String(100), nullable=True)
     city = db.Column(db.String(100), nullable=True)
@@ -47,6 +47,32 @@ def submit_form():
 
     new_user = Users(name=name, last_name=last_name, city=city)
     db.session.add(new_user)
+    db.session.commit()
+
+    return redirect(url_for('index'))
+
+
+@app.route('/update/<int:user_id>', methods=['GET'])
+def update_form(user_id):
+    user = Users.query.get_or_404(user_id)
+    return render_template('updateForm.html', user=user)
+
+
+@app.route('/update/<int:user_id>', methods=['POST'])
+def update_user(user_id):
+    user = Users.query.get_or_404(user_id)
+
+    name = request.form.get('name')
+    last_name = request.form.get('last_name')
+    city = request.form.get('city')
+
+    if not name or not last_name or not city:
+        return redirect(url_for('index'))
+
+    user.name = name
+    user.last_name = last_name
+    user.city = city
+
     db.session.commit()
 
     return redirect(url_for('index'))

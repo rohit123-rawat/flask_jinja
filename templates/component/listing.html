@@ -14,6 +14,9 @@
                 <th scope="col" class="px-6 py-3">
                     Delete
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    Edit
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +36,12 @@
                         <button type="submit"> <i class="fas fa-trash-alt text-red-500"></i></button>
                     </form>
                 </td>
+                <td class="px-6 py-4">
+                    <a href="{{  url_for('update_form', user_id=user.id) }}" class="font-bold py-2 px-4 rounded">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+                
             </tr>
             {% endfor %}
         </tbody>

@@ -1,5 +1,3 @@
-fetchUsers();
-
 function redirectToChartPage() {
   window.location.href = "/chart";
 }
@@ -32,4 +30,9 @@ document.getElementById("myForm").addEventListener("submit", function (event) {
     });
 
   closeModal();
+});
+
+document.getElementById("itemId").click(function () {
+  var itemId = $(this).data("item-id");
+  alert(itemId);
 });
